@@ -9,7 +9,8 @@
             "name": "Launch App",
             "request": "launch",
             "mainClass": "electropart.Main",
-            "vmArgs": "--module-path /home/stef/Documents/tools/openjfx-23.0.1_linux-x64_bin-sdk/javafx-sdk-23.0.1/lib/ --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path /home/%USERNAME%/Documents/tools/openjfx-23.0.1_linux-x64_bin-sdk/javafx-sdk-23.0.1/lib/ --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path D://tools//javafx-sdk-23.0.1//lib --add-modules javafx.controls,javafx.fxml -classpath D://tools//sqlite-jdbc-3.47.1.0.jar",
         }
     ]
 }
