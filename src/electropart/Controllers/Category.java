@@ -20,14 +20,38 @@ public class Category {
     private TextField addCat;
 
     public void textBarCat(ActionEvent event) {
-        String db = "jdbc:sqlite:" + addCat.getText() + ".db";
+        String db = "jdbc:sqlite:" + addCat.getText() + ".sqlite";
         System.out.println(db);
+
+        var sqlData = "CREATE TABLE IF NOT EXISTS " + addCat.getText() + " ("
+                + "	id INTEGER PRIMARY KEY,"
+                + "	value text NOT NULL,"
+                + "	quantity INTIGER NOT NULL,"
+                + " footprint TEXT NOT NULL,"
+                + "	manufacturer TEXT NOT NULL,"
+                + "	location TEXT NOT NULL,"
+                + "	pdf TEXT NOT NULL,"
+                + "	added TEXT DEFAULT CURRENT_TIMESTAMP"
+                + ");";
+
+        var sqlInsert = "INSERT INTO " + addCat.getText()
+                + "(value,quantity,footprint,manufacturer,location,pdf) VALUES(?,?,?,?,?,?)";
 
         try (var conn = DriverManager.getConnection(db)) {
             if (conn != null) {
-                var meta = conn.getMetaData();
-                System.out.println("The driver name is " + meta.getDriverName());
-                System.out.println("A new database has been created.");
+                var table = conn.createStatement();
+                table.execute(sqlData);
+
+                var dataIn = conn.prepareStatement(sqlInsert);
+                dataIn.setString(1, "10uF");
+                dataIn.setInt(2, 20);
+                dataIn.setString(3, "normal");
+                dataIn.setString(4, "SMT");
+                dataIn.setString(5, "Top shelf");
+                dataIn.setString(6, "website.pdf");
+
+                dataIn.executeUpdate();
+
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());

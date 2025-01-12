@@ -33,7 +33,6 @@
 -->
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -66,20 +65,9 @@
       </MenuBar>
     <AnchorPane id="#t2" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <ListView layoutX="13.0" layoutY="54.0" prefHeight="510.0" prefWidth="200.0" />
             <TextField id="t1" layoutX="14.0" layoutY="15.0" prefHeight="26.0" prefWidth="200.0" promptText="Search" />
-            <Button id="buttSelect" layoutX="221.0" layoutY="13.0" mnemonicParsing="false" onAction="#addCategory" text="OK" />
-            <DialogPane layoutX="340.0" layoutY="91.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="480.0">
-                <header>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
-                </header>
-                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
-                </content>
-                <expandableContent>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
-                </expandableContent>
-            </DialogPane>
+            <Button id="buttSelect" layoutX="226.0" layoutY="16.0" mnemonicParsing="false" onAction="#test" text="OK" />
+            <ListView fx:id="listView" layoutX="14.0" layoutY="50.0" prefHeight="486.0" prefWidth="200.0" />
       </children>
     </AnchorPane>
   </children>
