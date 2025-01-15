@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 
 public class Category {
     private Stage stage;
@@ -23,7 +24,7 @@ public class Category {
         String db = "jdbc:sqlite:" + addCat.getText() + ".sqlite";
         System.out.println(db);
 
-        var sqlData = "CREATE TABLE IF NOT EXISTS " + addCat.getText() + " ("
+        var sqlTable = "CREATE TABLE IF NOT EXISTS " + addCat.getText() + " ("
                 + "	id INTEGER PRIMARY KEY,"
                 + "	value text NOT NULL,"
                 + "	quantity INTIGER NOT NULL,"
@@ -31,7 +32,7 @@ public class Category {
                 + "	manufacturer TEXT NOT NULL,"
                 + "	location TEXT NOT NULL,"
                 + "	pdf TEXT NOT NULL,"
-                + "	added TEXT DEFAULT CURRENT_TIMESTAMP"
+                + "	timestamp DATE DEFAULT CURRENT_TIMESTAMP"
                 + ");";
 
         var sqlInsert = "INSERT INTO " + addCat.getText()
@@ -40,7 +41,7 @@ public class Category {
         try (var conn = DriverManager.getConnection(db)) {
             if (conn != null) {
                 var table = conn.createStatement();
-                table.execute(sqlData);
+                table.execute(sqlTable);
 
                 var dataIn = conn.prepareStatement(sqlInsert);
                 dataIn.setString(1, "10uF");
@@ -56,6 +57,7 @@ public class Category {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+        ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
     public void addEntry(ActionEvent event) throws Exception {

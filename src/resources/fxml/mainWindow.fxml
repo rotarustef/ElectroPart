@@ -37,6 +37,8 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -66,8 +68,19 @@
     <AnchorPane id="#t2" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
             <TextField id="t1" layoutX="14.0" layoutY="15.0" prefHeight="26.0" prefWidth="200.0" promptText="Search" />
-            <Button id="buttSelect" layoutX="226.0" layoutY="16.0" mnemonicParsing="false" onAction="#test" text="OK" />
+            <Button id="buttSelect" layoutX="226.0" layoutY="16.0" mnemonicParsing="false" onAction="#test" text="Refresh" />
             <ListView fx:id="listView" layoutX="14.0" layoutY="50.0" prefHeight="486.0" prefWidth="200.0" />
+            <TableView fx:id="table" editable="true" layoutX="226.0" layoutY="50.0" prefHeight="486.0" prefWidth="758.0">
+              <columns>
+                <TableColumn id="valueColumn" fx:id="valueColumn" prefWidth="69.60002136230469" text="Value" />
+                <TableColumn id="quantityColumn" fx:id="quantityColumn" prefWidth="98.39996337890625" text="Quantity" />
+                  <TableColumn id="footprintColumn" fx:id="footprintColumn" prefWidth="96.800048828125" text="Footprint" />
+                  <TableColumn id="manufacturerColumn" fx:id="manufacturerColumn" prefWidth="142.39999389648438" text="Manufacturer" />
+                  <TableColumn id="locationColumn" fx:id="locationColumn" minWidth="5.5999755859375" prefWidth="112.79998779296875" text="Location" />
+                  <TableColumn id="pdfColumn" fx:id="pdfColumn" prefWidth="125.5999755859375" text="PDF location" />
+                  <TableColumn fx:id="timeColumn" minWidth="0.0" prefWidth="106.4000244140625" text="Timestamp" />
+              </columns>
+            </TableView>
       </children>
     </AnchorPane>
   </children>
