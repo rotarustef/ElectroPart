@@ -3,6 +3,8 @@ package electropart.Controllers;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import electropart.DbControl;
+import electropart.TableData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,46 +19,17 @@ public class Category {
     private Stage stage;
     private Parent root;
 
+    public DbControl dbc = new DbControl("./");
+
     @FXML
     private TextField addCat;
 
     public void textBarCat(ActionEvent event) {
-        String db = "jdbc:sqlite:" + addCat.getText() + ".sqlite";
-        System.out.println(db);
 
-        var sqlTable = "CREATE TABLE IF NOT EXISTS " + addCat.getText() + " ("
-                + "	id INTEGER PRIMARY KEY,"
-                + "	value text NOT NULL,"
-                + "	quantity INTIGER NOT NULL,"
-                + " footprint TEXT NOT NULL,"
-                + "	manufacturer TEXT NOT NULL,"
-                + "	location TEXT NOT NULL,"
-                + "	pdf TEXT NOT NULL,"
-                + "	timestamp DATE DEFAULT CURRENT_TIMESTAMP"
-                + ");";
-
-        var sqlInsert = "INSERT INTO " + addCat.getText()
-                + "(value,quantity,footprint,manufacturer,location,pdf) VALUES(?,?,?,?,?,?)";
-
-        try (var conn = DriverManager.getConnection(db)) {
-            if (conn != null) {
-                var table = conn.createStatement();
-                table.execute(sqlTable);
-
-                var dataIn = conn.prepareStatement(sqlInsert);
-                dataIn.setString(1, "10uF");
-                dataIn.setInt(2, 20);
-                dataIn.setString(3, "normal");
-                dataIn.setString(4, "SMT");
-                dataIn.setString(5, "Top shelf");
-                dataIn.setString(6, "website.pdf");
-
-                dataIn.executeUpdate();
-
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
+        dbc.generateDataBase(addCat.getText());
+        dbc.insertData(addCat.getText(), new TableData("10uF", 10, "normal", "NXP", "Top shelf", "https://ww1.microchip.com/downloads/aemDocuments/documents/SCBU/ProductDocuments/DataSheets/ATECC608A-CryptoAuthentication-Device-Summary-Data-Sheet-DS40001977B.pdf", "null"));
+        
+        
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 

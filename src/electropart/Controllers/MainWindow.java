@@ -1,6 +1,7 @@
 package electropart.Controllers;
 
 import electropart.TableData;
+import electropart.DbControl;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,9 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -28,7 +27,7 @@ public class MainWindow implements Initializable {
     private Scene scene;
     private Parent root;
 
-    private String dbPath = "./";
+    public DbControl dbc = new DbControl("./");
     public ObservableList<String> names;
 
     @FXML
@@ -36,6 +35,9 @@ public class MainWindow implements Initializable {
 
     @FXML
     private TableView<TableData> table;
+
+    @FXML
+    private TableColumn<TableData, String> idColumn;
 
     @FXML
     private TableColumn<TableData, String> valueColumn;
@@ -62,33 +64,29 @@ public class MainWindow implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        names = FXCollections.observableArrayList(getDatabese());
+        names = FXCollections.observableArrayList(dbc.getDatabese());
         listView.setItems(names);
 
-
-        // valueColumn.setCellValueFactory(cellData -> cellData.getValue().valueProperty());
-        // quantityColumn.setCellValueFactory(cellData -> cellData.getValue().qunatityProperty().asObject());
-        // footprintColumn.setCellValueFactory(cellData -> cellData.getValue().footprintProperty());
-        // manufacturerColumn.setCellValueFactory(cellData -> cellData.getValue().manufacturerProperty());
-        // locationColumn.setCellValueFactory(cellData -> cellData.getValue().locationProperty());
-        // pdfColumn.setCellValueFactory(cellData -> cellData.getValue().pdfProperty());
-        // timeColumn.setCellValueFactory(cellData -> cellData.getValue().getTimestamp());
-
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("qunatity"));
         footprintColumn.setCellValueFactory(new PropertyValueFactory<>("footprint"));
         manufacturerColumn.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         pdfColumn.setCellValueFactory(new PropertyValueFactory<>("pdf"));
+        timeColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
 
         tableDataList = FXCollections.observableArrayList();
-        tableDataList.add(new TableData("Item 1", 10, "Small", "Manufacturer A", "Location A", "file1.pdf", "2025"));
 
+        for (String s : dbc.getDatabese()) {
+            System.out.println(dbc.selectData(s).getKey());
+            System.out.println(dbc.selectData(s).getValue().getValue());
+            tableDataList.add(dbc.selectData(s).getValue());
+        }
 
         table.setItems(tableDataList);
-
-    }
         
+    }
 
     public void mainWindow(ActionEvent event) throws Exception {
         root = FXMLLoader.load(getClass().getResource("/resources/fxml/mainWindow.fxml"));
@@ -118,22 +116,9 @@ public class MainWindow implements Initializable {
         // ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
-    public ArrayList<String> getDatabese() {
-        File folder = new File(dbPath);
-        ArrayList<String> dbCategory = new ArrayList<String>();
-
-        for (File file : folder.listFiles()) {
-            if (file.getName().contains(".sqlite")) {
-                dbCategory.add(file.getName().split(".sqlite")[0]);
-            }
-        }
-
-        return dbCategory;
-    }
-
     public void test(ActionEvent e) throws Exception {
 
-        names = FXCollections.observableArrayList(getDatabese());
+        names = FXCollections.observableArrayList(dbc.getDatabese());
         listView.setItems(names);
     }
 
