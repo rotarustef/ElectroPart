@@ -2,7 +2,8 @@ package electropart.Controllers;
 
 import electropart.TableData;
 import electropart.DbControl;
-
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -67,6 +68,22 @@ public class MainWindow implements Initializable {
         names = FXCollections.observableArrayList(dbc.getDatabese());
         listView.setItems(names);
 
+        listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            
+            @Override
+            public void changed(ObservableValue<? extends String> var1, String var2, String var3) {
+                String printDb = listView.getSelectionModel().getSelectedItem();
+
+                tableDataList = FXCollections.observableArrayList();
+
+                for(TableData tableRow: dbc.selectData(printDb)){
+                    tableDataList.add(tableRow);
+                }
+
+                table.setItems(tableDataList);
+            }
+        });
+
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("qunatity"));
@@ -76,16 +93,8 @@ public class MainWindow implements Initializable {
         pdfColumn.setCellValueFactory(new PropertyValueFactory<>("pdf"));
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
 
-        tableDataList = FXCollections.observableArrayList();
-
-        for (String s : dbc.getDatabese()) {
-            System.out.println(dbc.selectData(s).getKey());
-            System.out.println(dbc.selectData(s).getValue().getValue());
-            tableDataList.add(dbc.selectData(s).getValue());
-        }
-
-        table.setItems(tableDataList);
         
+
     }
 
     public void mainWindow(ActionEvent event) throws Exception {
@@ -116,10 +125,33 @@ public class MainWindow implements Initializable {
         // ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
+    public void addEntry(ActionEvent event) throws Exception {
+        root = FXMLLoader.load(getClass().getResource("/resources/fxml/addEntry.fxml"));
+        // stage = (Stage)(((Node)event.getSource()).getScene().getWindow());
+        // scene = new Scene(root);
+        // stage.setScene(scene);
+        // stage.show();
+        stage = new Stage();
+
+        Image logo = new Image("file:../../assets/image.png");
+        stage.getIcons().add(logo);
+
+        stage.setTitle("Add Entry");
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.show();
+
+        // ((Node)(event.getSource())).getScene().getWindow().hide();
+    }
+
     public void test(ActionEvent e) throws Exception {
 
         names = FXCollections.observableArrayList(dbc.getDatabese());
         listView.setItems(names);
+    }
+
+    public void test2(ActionEvent e, String printDb) throws Exception{
+        
     }
 
 }

@@ -55,7 +55,7 @@
           <Menu mnemonicParsing="false" text="Add">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#addCategory" text="Category" />
-                  <MenuItem mnemonicParsing="false" text="Entry" />
+                  <MenuItem mnemonicParsing="false" onAction="#addEntry" text="Entry" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

@@ -1,7 +1,7 @@
 package electropart;
 
 public class TableData {
-    private final int id;    
+    private int id;    
     private final String value;
     private final int qunatity;
     private final String footprint;
@@ -23,6 +23,10 @@ public class TableData {
 
     public int getId(){
         return this.id;
+    }
+
+    public void setId(int newId){
+        this.id = newId;
     }
     
     public String getValue(){

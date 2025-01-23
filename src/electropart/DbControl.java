@@ -6,9 +6,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javafx.scene.paint.Paint;
-import javafx.util.Pair;
-
 public class DbControl {
     private final String dbPath;
 
@@ -81,9 +78,10 @@ public class DbControl {
         }
     }
 
-    public Pair<Integer, TableData> selectData(String dbName) {
-        TableData data = new TableData(null, 0, null, null, null, null, null);
-        Pair<Integer, TableData> rowData = new Pair<Integer,TableData>(0, data);
+    public ArrayList<TableData> selectData(String dbName) {
+
+        TableData data;
+        ArrayList<TableData> rowData = new ArrayList<TableData>();
 
         String db = "jdbc:sqlite:" + dbName + ".sqlite";
 
@@ -95,17 +93,17 @@ public class DbControl {
                 var result = table.executeQuery(sqlSelect);
 
                 while (result.next()) {
-
                     data = new TableData(
-                        result.getString("value"), 
-                        result.getInt("quantity"), 
-                        result.getString("footprint"), 
-                        result.getString("manufacturer"), 
-                        result.getString("location"), 
-                        result.getString("pdf"), 
-                        result.getString("timestamp"));
-                    
-                    rowData = new Pair<Integer,TableData>(result.getInt("id"), data);
+                            result.getString("value"),
+                            result.getInt("quantity"),
+                            result.getString("footprint"),
+                            result.getString("manufacturer"),
+                            result.getString("location"),
+                            result.getString("pdf"),
+                            result.getString("timestamp"));
+
+                    data.setId(result.getInt("id"));
+                    rowData.add(data);
                 }
 
             }
