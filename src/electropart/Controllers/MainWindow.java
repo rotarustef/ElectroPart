@@ -70,25 +70,35 @@ public class MainWindow implements Initializable {
 
     private ObservableList<TableData> tableDataList;
 
+    ClipboardContent content = new ClipboardContent();
+
+    public void reloadList() {
+        names = FXCollections.observableArrayList(dbc.getDatabese());
+        listView.setItems(names);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         names = FXCollections.observableArrayList(dbc.getDatabese());
         listView.setItems(names);
 
         listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+        
 
             @Override
             public void changed(ObservableValue<? extends String> var1, String var2, String var3) {
                 String printDb = listView.getSelectionModel().getSelectedItem();
+                reloadList();
 
-                tableDataList = FXCollections.observableArrayList();
+                if (printDb != null) {
+                    tableDataList = FXCollections.observableArrayList();
 
-                for (TableData tableRow : dbc.selectData(printDb)) {
-                    // System.out.println(tableRow);
-                    tableDataList.add(tableRow);
+                    for (TableData tableRow : dbc.selectData(printDb)) {
+                        tableDataList.add(tableRow);
+                    }
+
+                    table.setItems(tableDataList);
                 }
-
-                table.setItems(tableDataList);
             }
         });
 
@@ -145,21 +155,17 @@ public class MainWindow implements Initializable {
         textDelete.clear();
     }
 
-    public void test(ActionEvent e) throws Exception {
-
-        names = FXCollections.observableArrayList(dbc.getDatabese());
-        listView.setItems(names);
-
-    }
+    
 
     public void getPdf(KeyEvent e) throws Exception {
-        System.out.println(table.getSelectionModel().getSelectedItems().get(0).getPdf());
+        var selectPdf = table.getSelectionModel().getSelectedItems();
 
-        ClipboardContent content = new ClipboardContent();
-        String pdf = table.getSelectionModel().getSelectedItems().get(0).getPdf();
-        content.putString(pdf);
-
-        Clipboard.getSystemClipboard().setContent(content);
+        if(!selectPdf.isEmpty()){
+            String pdf = selectPdf.get(0).getPdf();
+            content.putString(pdf);
+    
+            Clipboard.getSystemClipboard().setContent(content);
+        }
     }
 
 }

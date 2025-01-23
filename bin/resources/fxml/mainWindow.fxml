@@ -50,7 +50,7 @@
           <Menu mnemonicParsing="false" text="Add">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#addCategory" text="Category" />
-                  <MenuItem mnemonicParsing="false" onAction="#addEntry" text="Entry" />
+                  <MenuItem mnemonicParsing="false" onAction="#addEntry" text="Entry Data" />
             </items>
           </Menu>
         </menus>
@@ -70,9 +70,9 @@
                   <TableColumn fx:id="timeColumn" minWidth="0.0" prefWidth="159.0" text="Timestamp" />
               </columns>
             </TableView>
-            <Button id="buttSelect" layoutX="226.0" layoutY="18.0" mnemonicParsing="false" onAction="#test" text="Refresh" />
-            <TextField id="t1" layoutX="625.0" layoutY="18.0" prefHeight="26.0" prefWidth="200.0" promptText="Search" />
             <TextField id="t1" fx:id="textDelete" layoutX="14.0" layoutY="18.0" onAction="#deleteTable" prefHeight="26.0" prefWidth="200.0" promptText="Enter ID to delete the row" />
+            <Button id="buttSelect" layoutX="226.0" layoutY="18.0" mnemonicParsing="false" onAction="#addCategory" text="Category" />
+            <Button id="buttSelect" layoutX="302.0" layoutY="18.0" mnemonicParsing="false" onAction="#addEntry" text="Entry Data" />
       </children>
     </AnchorPane>
   </children>

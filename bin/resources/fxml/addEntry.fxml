@@ -57,7 +57,7 @@
             <Text layoutX="375.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manufacturer" />
             <Text layoutX="502.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location" />
             <Text layoutX="624.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PDF" />
-            <Text layoutX="164.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert data for the selected category in the drop down list bellow" />
+            <Text layoutX="174.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert data for the selected category in the drop down list bellow" />
       </children>
     </AnchorPane>
   </children>

@@ -18,8 +18,8 @@ public class DbControl {
         ArrayList<String> dbCategory = new ArrayList<String>();
 
         for (File file : folder.listFiles()) {
+
             if (file.getName().contains(".sqlite")) {
-                System.out.println(file.getName().split(".sqlite")[0]);
                 dbCategory.add(file.getName().split(".sqlite")[0]);
             }
         }
@@ -29,7 +29,6 @@ public class DbControl {
 
     public void generateDataBase(String dbName) {
         String db = "jdbc:sqlite:" + dbName + ".sqlite";
-        System.out.println(dbName);
 
         String sqlTable = "CREATE TABLE IF NOT EXISTS " + dbName + " ("
                 + "	id INTEGER PRIMARY KEY,"
@@ -111,15 +110,14 @@ public class DbControl {
 
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-            System.err.println("here");
         }
 
         return rowData;
     }
 
-    public void deleteData(String dbName, int id){
+    public void deleteData(String dbName, int id) {
         String db = "jdbc:sqlite:" + dbName + ".sqlite";
-        
+
         var sqlDelete = "DELETE FROM " + dbName + " WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(db)) {
