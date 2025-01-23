@@ -19,6 +19,7 @@ public class DbControl {
 
         for (File file : folder.listFiles()) {
             if (file.getName().contains(".sqlite")) {
+                System.out.println(file.getName().split(".sqlite")[0]);
                 dbCategory.add(file.getName().split(".sqlite")[0]);
             }
         }
@@ -28,6 +29,7 @@ public class DbControl {
 
     public void generateDataBase(String dbName) {
         String db = "jdbc:sqlite:" + dbName + ".sqlite";
+        System.out.println(dbName);
 
         String sqlTable = "CREATE TABLE IF NOT EXISTS " + dbName + " ("
                 + "	id INTEGER PRIMARY KEY,"
@@ -99,10 +101,11 @@ public class DbControl {
                             result.getString("footprint"),
                             result.getString("manufacturer"),
                             result.getString("location"),
-                            result.getString("pdf"),
-                            result.getString("timestamp"));
+                            result.getString("pdf"));
 
                     data.setId(result.getInt("id"));
+                    data.setTimestamp(result.getString("timestamp"));
+
                     rowData.add(data);
                 }
 
@@ -110,6 +113,7 @@ public class DbControl {
 
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+            System.err.println("here");
         }
 
         return rowData;

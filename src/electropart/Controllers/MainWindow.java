@@ -15,6 +15,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -69,14 +72,15 @@ public class MainWindow implements Initializable {
         listView.setItems(names);
 
         listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            
+
             @Override
             public void changed(ObservableValue<? extends String> var1, String var2, String var3) {
                 String printDb = listView.getSelectionModel().getSelectedItem();
 
                 tableDataList = FXCollections.observableArrayList();
 
-                for(TableData tableRow: dbc.selectData(printDb)){
+                for (TableData tableRow : dbc.selectData(printDb)) {
+                    // System.out.println(tableRow);
                     tableDataList.add(tableRow);
                 }
 
@@ -92,8 +96,6 @@ public class MainWindow implements Initializable {
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         pdfColumn.setCellValueFactory(new PropertyValueFactory<>("pdf"));
         timeColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
-
-        
 
     }
 
@@ -148,10 +150,17 @@ public class MainWindow implements Initializable {
 
         names = FXCollections.observableArrayList(dbc.getDatabese());
         listView.setItems(names);
+
     }
 
-    public void test2(ActionEvent e, String printDb) throws Exception{
+    public void getPdf(KeyEvent e) throws Exception {
+        System.out.println(table.getSelectionModel().getSelectedItems().get(0).getPdf());
         
+        ClipboardContent content = new ClipboardContent();
+        String pdf = table.getSelectionModel().getSelectedItems().get(0).getPdf();
+        content.putString(pdf);
+        
+        Clipboard.getSystemClipboard().setContent(content);
     }
 
 }

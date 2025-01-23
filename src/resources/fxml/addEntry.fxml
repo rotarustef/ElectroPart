@@ -43,14 +43,13 @@
   <children>
     <AnchorPane id="#t2" maxHeight="-1.0" maxWidth="-1.0" prefHeight="279.0" prefWidth="682.0" VBox.vgrow="ALWAYS">
       <children>
-            <Button id="buttSelect" layoutX="395.0" layoutY="93.0" mnemonicParsing="false" text="OK" />
-            <ChoiceBox id="select" layoutX="229.0" layoutY="94.0" prefWidth="150.0" />
-            <TextField layoutX="23.0" layoutY="183.0" prefHeight="26.0" prefWidth="95.0" />
-            <TextField layoutX="134.0" layoutY="183.0" prefHeight="26.0" prefWidth="95.0" />
-            <TextField layoutX="251.0" layoutY="183.0" prefHeight="26.0" prefWidth="95.0" />
-            <TextField layoutX="368.0" layoutY="183.0" prefHeight="26.0" prefWidth="95.0" />
-            <TextField layoutX="480.0" layoutY="183.0" prefHeight="26.0" prefWidth="95.0" />
-            <TextField layoutX="589.0" layoutY="183.0" prefHeight="26.0" prefWidth="95.0" />
+            <Button id="buttSelect" layoutX="402.0" layoutY="93.0" mnemonicParsing="false" onAction="#getTableData" text="OK" />
+            <TextField fx:id="textValue" layoutX="23.0" layoutY="183.0" prefHeight="26.0" prefWidth="95.0" />
+            <TextField fx:id="textQuantity" layoutX="134.0" layoutY="183.0" prefHeight="26.0" prefWidth="95.0" />
+            <TextField fx:id="textFootprint" layoutX="251.0" layoutY="183.0" prefHeight="26.0" prefWidth="95.0" />
+            <TextField fx:id="textManufacturer" layoutX="368.0" layoutY="183.0" prefHeight="26.0" prefWidth="95.0" />
+            <TextField fx:id="textLocation" layoutX="480.0" layoutY="183.0" prefHeight="26.0" prefWidth="95.0" />
+            <TextField fx:id="textPdf" layoutX="589.0" layoutY="183.0" prefHeight="26.0" prefWidth="95.0" />
             <Text layoutX="54.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Value" />
             <Text layoutX="157.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity" />
             <Text layoutX="272.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Footprint" />
@@ -58,6 +57,7 @@
             <Text layoutX="502.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location" />
             <Text layoutX="624.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PDF" />
             <Text layoutX="164.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Insert data for the selected category in the drop down list bellow" />
+            <ChoiceBox layoutX="229.0" layoutY="93.0" prefWidth="150.0" />
       </children>
     </AnchorPane>
   </children>

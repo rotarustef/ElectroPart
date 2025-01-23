@@ -70,7 +70,7 @@
             <TextField id="t1" layoutX="14.0" layoutY="15.0" prefHeight="26.0" prefWidth="200.0" promptText="Search" />
             <Button id="buttSelect" layoutX="226.0" layoutY="16.0" mnemonicParsing="false" onAction="#test" text="Refresh" />
             <ListView fx:id="listView" layoutX="14.0" layoutY="50.0" prefHeight="486.0" prefWidth="200.0" />
-            <TableView fx:id="table" editable="true" layoutX="226.0" layoutY="50.0" prefHeight="486.0" prefWidth="758.0">
+            <TableView fx:id="table" editable="true" layoutX="226.0" layoutY="50.0" onKeyPressed="#getPdf" prefHeight="486.0" prefWidth="758.0">
               <columns>
                   <TableColumn id="valueColumn" fx:id="idColumn" prefWidth="45.60005187988281" text="Id" />
                 <TableColumn id="valueColumn" fx:id="valueColumn" prefWidth="63.20001220703125" text="Value" />
