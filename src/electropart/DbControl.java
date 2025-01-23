@@ -61,8 +61,6 @@ public class DbControl {
 
         try (Connection conn = DriverManager.getConnection(db)) {
             if (conn != null) {
-                // var table = conn.createStatement();
-                // table.execute(sqlTable);
 
                 var dataIn = conn.prepareStatement(sqlInsert);
                 dataIn.setString(1, data.getValue());
@@ -117,5 +115,23 @@ public class DbControl {
         }
 
         return rowData;
+    }
+
+    public void deleteData(String dbName, int id){
+        String db = "jdbc:sqlite:" + dbName + ".sqlite";
+        
+        var sqlDelete = "DELETE FROM " + dbName + " WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(db)) {
+            if (conn != null) {
+                var table = conn.prepareStatement(sqlDelete);
+
+                table.setInt(1, id);
+                table.executeUpdate();
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+
     }
 }

@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.TableColumn;
 
@@ -60,6 +61,9 @@ public class MainWindow implements Initializable {
 
     @FXML
     private TableColumn<TableData, String> pdfColumn;
+
+    @FXML
+    private TextField textDelete;
 
     @FXML
     private TableColumn<TableData, String> timeColumn;
@@ -109,10 +113,6 @@ public class MainWindow implements Initializable {
 
     public void addCategory(ActionEvent event) throws Exception {
         root = FXMLLoader.load(getClass().getResource("/resources/fxml/addCategory.fxml"));
-        // stage = (Stage)(((Node)event.getSource()).getScene().getWindow());
-        // scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.show();
         stage = new Stage();
 
         Image logo = new Image("file:../../assets/image.png");
@@ -123,16 +123,10 @@ public class MainWindow implements Initializable {
         stage.setResizable(false);
 
         stage.show();
-
-        // ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
     public void addEntry(ActionEvent event) throws Exception {
         root = FXMLLoader.load(getClass().getResource("/resources/fxml/addEntry.fxml"));
-        // stage = (Stage)(((Node)event.getSource()).getScene().getWindow());
-        // scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.show();
         stage = new Stage();
 
         Image logo = new Image("file:../../assets/image.png");
@@ -142,8 +136,13 @@ public class MainWindow implements Initializable {
         stage.setScene(new Scene(root));
         stage.setResizable(false);
         stage.show();
+    }
 
-        // ((Node)(event.getSource())).getScene().getWindow().hide();
+    public void deleteTable(ActionEvent event) {
+        String dbnName = listView.getSelectionModel().getSelectedItem();
+        dbc.deleteData(dbnName, Integer.parseInt(textDelete.getText()));
+
+        textDelete.clear();
     }
 
     public void test(ActionEvent e) throws Exception {
@@ -155,11 +154,11 @@ public class MainWindow implements Initializable {
 
     public void getPdf(KeyEvent e) throws Exception {
         System.out.println(table.getSelectionModel().getSelectedItems().get(0).getPdf());
-        
+
         ClipboardContent content = new ClipboardContent();
         String pdf = table.getSelectionModel().getSelectedItems().get(0).getPdf();
         content.putString(pdf);
-        
+
         Clipboard.getSystemClipboard().setContent(content);
     }
 

@@ -47,28 +47,16 @@
   <children>
       <MenuBar prefHeight="10.0" prefWidth="1000.0">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="DB File" />
-            </items>
-          </Menu>
           <Menu mnemonicParsing="false" text="Add">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#addCategory" text="Category" />
                   <MenuItem mnemonicParsing="false" onAction="#addEntry" text="Entry" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
         </menus>
       </MenuBar>
     <AnchorPane id="#t2" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <TextField id="t1" layoutX="14.0" layoutY="15.0" prefHeight="26.0" prefWidth="200.0" promptText="Search" />
-            <Button id="buttSelect" layoutX="226.0" layoutY="16.0" mnemonicParsing="false" onAction="#test" text="Refresh" />
             <ListView fx:id="listView" layoutX="14.0" layoutY="50.0" prefHeight="486.0" prefWidth="200.0" />
             <TableView fx:id="table" editable="true" layoutX="226.0" layoutY="50.0" onKeyPressed="#getPdf" prefHeight="486.0" prefWidth="758.0">
               <columns>
@@ -82,6 +70,9 @@
                   <TableColumn fx:id="timeColumn" minWidth="0.0" prefWidth="159.0" text="Timestamp" />
               </columns>
             </TableView>
+            <Button id="buttSelect" layoutX="226.0" layoutY="18.0" mnemonicParsing="false" onAction="#test" text="Refresh" />
+            <TextField id="t1" layoutX="625.0" layoutY="18.0" prefHeight="26.0" prefWidth="200.0" promptText="Search" />
+            <TextField id="t1" fx:id="textDelete" layoutX="14.0" layoutY="18.0" onAction="#deleteTable" prefHeight="26.0" prefWidth="200.0" promptText="Enter ID to delete the row" />
       </children>
     </AnchorPane>
   </children>
